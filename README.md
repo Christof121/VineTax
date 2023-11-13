@@ -3,6 +3,8 @@ Script to extract the Tax Value using the Amazon API
 
 Tampermonkey required - https://www.tampermonkey.net/
 
+Script: https://github.com/Christof121/VineTax/raw/main/taxViewer.user.js
+
 Similar to clicking on 'Weitere Details' and checking the network response from the API, but for lazy people.
 
 'Auswahl' means that there are more options to choose from. The script always selects the first option
