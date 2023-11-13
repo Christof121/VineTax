@@ -1,5 +1,6 @@
 # VineTax
 Script to extract the Tax Value using the Amazon API
+
 Tampermonkey required - https://www.tampermonkey.net/
 
 Similar to clicking on 'Weitere Details' and checking the network response from the API, but for lazy people.
