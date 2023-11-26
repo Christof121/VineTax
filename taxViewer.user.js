@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Vine Tax
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.1
 // @description  Abfragen der Tax Value
 // @author       Christof
 // @match        *://www.amazon.de/vine/*
@@ -22,6 +22,7 @@
         var taxElement = document.createElement("span");
         taxElement.style.position = "absolute";
         taxElement.style.transform = "translate(0px,-30px)"
+        taxElement.style.width = "fit-content"
 
         var buttonElement = document.createElement("button");
         buttonElement.textContent = "Get Tax";
