@@ -21,8 +21,8 @@
         var multi;
         var taxElement = document.createElement("span");
         taxElement.style.position = "absolute";
-        taxElement.style.transform = "translate(0px,-30px)"
-        taxElement.style.width = "fit-content"
+        taxElement.style.transform = "translate(0px,-30px)";
+        taxElement.style.width = "fit-content";
 
         var buttonElement = document.createElement("button");
         buttonElement.textContent = "Get Tax";
