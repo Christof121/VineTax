@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Vine Tax
 // @namespace    http://tampermonkey.net/
-// @version      1.3
+// @version      1.3.1
 // @updateURL    https://raw.githubusercontent.com/Christof121/VineTax/main/taxViewer.user.js
 // @downloadURL  https://raw.githubusercontent.com/Christof121/VineTax/main/taxViewer.user.js
 // @description  Abfragen der Tax Value
@@ -136,6 +136,8 @@
             var recomURL = url + recommandationId;
             var fetchURL;
 
+            multi = false;
+
             console.log("Fetching Tax For: " + asin);
 
             // Bei mehreren Asin Liste abfragen und die erste Asin nutzen
@@ -149,7 +151,7 @@
                     .then(data => {
                     asin = data.result.variations[0].asin;
                     if(data.result.variations.length > 1){
-                        multi = true
+                        multi = true;
                     }
                 })
                     .catch(error => {
