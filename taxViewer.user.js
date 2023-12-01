@@ -27,7 +27,7 @@
     var multi;
     var lastClickedTile;
 
-    // Observer Neue Elemente
+    // Überwache ob Produkte hinzugefügt wurden
     const tilesCallback = function(mutationsList, observer) {
         newTiles = [];
         for (const mutation of mutationsList) {
@@ -50,17 +50,14 @@
             console.log("Added Tax Button to new Tiles");
         }
     };
-
-    // Einen MutationObserver erstellen und ihn auf das Ziel-DIV anwenden
     const tilesObserver = new MutationObserver(tilesCallback);
 
-    // Die Arten von Mutationen, die überwacht werden sollen
     const tilesConfig = { childList: true};
 
-    // Das Überwachungssystem starten
     tilesObserver.observe(container, tilesConfig);
 
-    // Observer für Popup-Element
+
+    // Überprüft ob das Popup hinzugefügt wurde
     const popupCallback = function(mutationsList, observer) {
         for (const mutation of mutationsList) {
             if (mutation.type === 'childList' || mutation.type === 'characterData') {
@@ -70,12 +67,10 @@
                     // Überprüfen, ob das hinzugefügte Element das Popup-Element ist
                     if (newNode.classList && newNode.classList.contains('a-modal-scroller') && newNode.classList.contains('a-declarative')) {
                         // Hier kannst du den Code für das neu hinzugefügte Popup-Element ausführen
-                        console.log('Popup-Element wurde hinzugefügt:', newNode);
                         var popupFooter = document.querySelector(".vvp-modal-footer");
                         popupTaxSpan = document.createElement("span");
                         popupTaxSpan.id = "popupTaxValue";
                         popupFooter.insertBefore(popupTaxSpan, popupFooter.firstChild);
-                        console.log(popupFooter);
                         fetchTax(lastClickedTile);
                     }
                 }
@@ -83,17 +78,14 @@
         }
     };
 
-    // Einen MutationObserver erstellen und ihn auf das Ziel-Popup-Element im Body anwenden
     const popupObserver = new MutationObserver(popupCallback);
 
-    // Das Ziel-Popup-Element auswählen (hier wird body verwendet, aber Sie können es anpassen)
     const body = document.body;
 
-    // Die Arten von Mutationen, die überwacht werden sollen
     const popupConfig = { childList: true, subtree: true };
 
-    // Das Überwachungssystem starten
     popupObserver.observe(body, popupConfig);
+
 
     function addTax(tiles){
         tiles.forEach(function(element){
@@ -119,7 +111,6 @@
             detailsButton.addEventListener('click', async function() {
                 var popupFooter = document.querySelector(".vvp-modal-footer");
                 lastClickedTile = element;
-                console.log(popupFooter);
                 if (popupFooter != null && popupTaxSpan != null) {
                     var footerSpan = document.querySelector(".vvp-modal-footer > span");
                     footerSpan.textContent = "Lade Tax";
@@ -145,12 +136,14 @@
             var recomURL = url + recommandationId;
             var fetchURL;
 
+            console.log("Fetching Tax For: " + asin);
+
             // Bei mehreren Asin Liste abfragen und die erste Asin nutzen
             if(isParentAsin){
                 fetchURL = recomURL;
 
                 encodedURL = fetchURL.replace(/#/g, '%23');
-                console.log(encodedURL);
+                //console.log(encodedURL);
                 await fetch(encodedURL)
                     .then(response => response.json()) // Annahme, dass die API JSON zurückgibt
                     .then(data => {
@@ -167,7 +160,7 @@
             fetchURL = fullURL;
 
             encodedURL = fetchURL.replace(/#/g, '%23');
-            console.log(encodedURL);
+            //console.log(encodedURL);
             fetch(encodedURL)
                 .then(response => response.json()) // Annahme, dass die API JSON zurückgibt
                 .then(data => {
@@ -191,6 +184,7 @@
                 if(footerSpan != null){
                     footerSpan.textContent = multiMsg + "Tax: " + tax + " " + currency;
                 }
+                console.log(multiMsg + "Tax: " + tax + " " + currency);
             })
                 .catch(error => {
                 console.error('Fehler bei der API-Anfrage:', error);
@@ -205,6 +199,7 @@
                 if(footerSpan != null){
                     footerSpan.textContent = "Fehler bei der Abfrage";
                 }
+                console.error("Fehler bei der Tax Abfrage " + error);
             });
         }else{
             console.log("Tax bereits abgefragt");
