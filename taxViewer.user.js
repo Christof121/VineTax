@@ -171,7 +171,6 @@
 
                 var taxSpan = document.createElement("span");
                 var multiMsg = ""
-                console.log("Multi Reset");
                 if(multi){
                     multiMsg = "Auswahl | exp. "
                     console.log("Mehrere Varianten | Wert der 1. Auswahl - Asin: " + asin + " Geschätzer Wert: " + tax + " " + currency);
